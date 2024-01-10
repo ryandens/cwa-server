@@ -45,13 +45,13 @@ public class TraceTimeIntervalWarningsCountryDirectory extends IndexDirectoryOnD
 
   @Override
   public void prepare(ImmutableStack<Object> indices) {
-    if (this.version.equals(VERSION_V1)) {
+    if (VERSION_V1.equals(this.version)) {
       this.addWritableToAll(ignoredValue -> Optional
           .of(decorateV1HourDirectory(
               new TraceTimeIntervalWarningsHourV1Directory(traceWarningsBundler, cryptoProvider,
                   distributionServiceConfig)
           )));
-    } else if (this.version.equals(VERSION_V2)) {
+    } else if (VERSION_V2.equals(this.version)) {
       logger.debug("Preparing encrypted checkins for version {}", this.version);
       this.addWritableToAll(ignoredValue -> Optional
           .of(decorateV2HourDirectory(
