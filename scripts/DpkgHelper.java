@@ -1,3 +1,4 @@
+import io.github.pixee.security.BoundedLineReader;
 import java.io.*;
 
 /**
@@ -16,10 +17,10 @@ class DpkgHelper {
         System.out.println("Handling file: " + fileName);
         File f = new File(dir, fileName);
         BufferedReader br = new BufferedReader(new FileReader(f));
-        String line = br.readLine();
+        String line = BoundedLineReader.readLine(br, 5_000_000);
         while (line != null) {
           pw.println(line);
-          line = br.readLine();
+          line = BoundedLineReader.readLine(br, 5_000_000);
         }
       pw.println();
       pw.flush();
